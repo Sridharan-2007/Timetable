@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            padding: 20px;
+            background-color: lightcyan;
+        }
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px ;
+        }
+        th, td {
+            border: 1px solid darkblue;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: skyblue;
+            color: white;
+        }
+        .input-section {
+            text-align: center;
+            margin: 20px ;
+        }
+        input {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid darkblue;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: deepskyblue;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Timetable</h1>
+    <div class="input-section">
+        <input type="text" id="dayInput" typebar="Enter Day">
+        <button id="showTimetableBtn">Show Timetable</button>
+    </div>
+
+    <table id="timetable" style="display: none;">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Subject</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        const timetableData = {
+            monday: [
+                "maths",
+                "maths",
+                "CS/Bio",
+                "physics",
+                "chemistry",
+                "chemistry",
+                "chemistry",
+                "english",
+                "pet"
+            ],
+            tuesday: [
+                "physics",
+                "physics",
+                "pet",
+                "english",
+                "english",
+                "physics",
+                "physics",
+                "maths",
+                "CS/Bio"
+            ],
+            wednesday: [
+                "chemistry",
+                "chemistry",
+                "maths",
+                "physics",
+                "chemistry",
+                "english",
+                "english",
+                "CS/Bio",
+                "maths"
+            ],
+            thursday: [
+                "maths",
+                "maths",
+                "CS/Bio",
+                "CS/Bio",
+                "CS/Bio",
+                "english",
+                "physics",
+                "physics",
+                "english"
+            ],
+            friday: [
+                "maths",
+                "maths",
+                "CS/Bio",
+                "CS/Bio",
+                "english",
+                "library",
+                "physics",
+                "chemistry",
+                "chemistry"
+            ]
+        };
+
+        document.getElementById('showTimetableBtn').addEventListener('click', () => {
+            const day = document.getElementById('dayInput').value.trim().toLowerCase();
+            const timetableBody = document.querySelector('#timetable tbody');
+            timetableBody.innerHTML = '';
+
+            if (timetableData[day]) {
+                const subjects = timetableData[day];
+                const times = [
+                    "9:00 - 9:40",
+                    "9:40 - 10:20",
+                    "10:30 - 11:10",
+                    "11:10 - 11:50",
+                    "11:50 - 12;30",
+                    "1:10 - 1:50",
+                    "1:50 - 2:30",
+                    "2:40 - 3:20",
+                    "3:20 - 4:00"
+                ];
+                
+                subjects.forEach((subject, index) => {
+                    const row = document.createElement('tr');
+                    const timeCell = document.createElement('td');
+                    const subjectCell = document.createElement('td');
+                    timeCell.textContent = times[index];
+                    subjectCell.textContent = subject;
+                    row.appendChild(timeCell);
+                    row.appendChild(subjectCell);
+                    timetableBody.appendChild(row);
+                });
+
+                document.getElementById('timetable').style.display = 'table';
+            } 
+        });
+    </script>
+</body>
+</html>
